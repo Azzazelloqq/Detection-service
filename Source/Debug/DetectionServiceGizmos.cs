@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Azzazelloqq.DetectionService.Source
+namespace Azzazelloqq.DetectionService.Source.Debug
 {
 [ExecuteAlways]
 public class DetectionServiceGizmos : MonoBehaviour
