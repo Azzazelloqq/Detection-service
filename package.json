@@ -1,0 +1,18 @@
+{
+  "name": "com.azzazello.detectionservice",
+  "version": "0.0.4",
+  "displayName": "Detection service",
+  "description": "Simple area detection service",
+  "unity": "2020.3",
+  "dependencies": {
+	  },
+  "keywords": [
+    "detection",
+    "service"
+  ],
+  "author": {
+    "name": "Azzazelloqq",
+    "email": "bog22232@ya.ru",
+    "url": "https://github.com/Azzazelloqq"
+  }
+}
