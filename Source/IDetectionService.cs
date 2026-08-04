@@ -44,6 +44,23 @@ public interface IDetectionService
 		LayerMask obstacleLayer);
 
 	/// <summary>
+	/// Detects objects into a caller-owned collection, clearing it before use.
+	/// </summary>
+	/// <param name="observerPosition">The observer's position.</param>
+	/// <param name="observerForward">The observer's forward direction.</param>
+	/// <param name="viewAngle">The observer's view angle in degrees.</param>
+	/// <param name="viewDistance">The observer's view distance.</param>
+	/// <param name="obstacleLayer">Layer mask for obstacles.</param>
+	/// <param name="result">Caller-owned collection receiving detected objects.</param>
+	public void DetectObjectsInView(
+		Vector3 observerPosition,
+		Vector3 observerForward,
+		float viewAngle,
+		float viewDistance,
+		LayerMask obstacleLayer,
+		ICollection<IDetectable> result);
+
+	/// <summary>
 	/// Gets the size of each grid cell in Unity world units.
 	/// </summary>
 	/// <returns>The size of each grid cell.</returns>

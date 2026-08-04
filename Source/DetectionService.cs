@@ -15,8 +15,6 @@ public class DetectionService : IDetectionService
 	/// </summary>
 	private readonly Dictionary<Vector2Int, List<IDetectable>> _grid = new();
 
-	private List<IDetectable> _detectedObjectsCash;
-
 	/// <summary>
 	/// Constructs a new instance of the DetectionService.
 	/// </summary>
@@ -63,14 +61,32 @@ public class DetectionService : IDetectionService
 		float viewDistance,
 		LayerMask obstacleLayer)
 	{
-		if (_detectedObjectsCash == null)
+		var result = new List<IDetectable>();
+		DetectObjectsInView(
+			observerPosition,
+			observerForward,
+			viewAngle,
+			viewDistance,
+			obstacleLayer,
+			result);
+		return result;
+	}
+
+	/// <inheritdoc/>
+	public void DetectObjectsInView(
+		Vector3 observerPosition,
+		Vector3 observerForward,
+		float viewAngle,
+		float viewDistance,
+		LayerMask obstacleLayer,
+		ICollection<IDetectable> result)
+	{
+		if (result == null)
 		{
-			_detectedObjectsCash = new List<IDetectable>();
+			throw new System.ArgumentNullException(nameof(result));
 		}
-		else
-		{
-			_detectedObjectsCash.Clear();
-		}
+
+		result.Clear();
 
 		var centerCell = GetCellCoords(observerPosition);
 		var cellsRange = Mathf.CeilToInt(viewDistance / _cellSize);
@@ -109,13 +125,12 @@ public class DetectionService : IDetectionService
 					if (!Physics.Raycast(observerPosition, directionToObject.normalized,
 							distanceToObject, obstacleLayer))
 					{
-						_detectedObjectsCash.Add(obj);
+						result.Add(obj);
 					}
 				}
 			}
 		}
 
-		return _detectedObjectsCash;
 	}
 
 	/// <summary>
